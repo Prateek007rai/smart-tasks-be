@@ -1,7 +1,6 @@
 const axios = require("axios");
 
 const generateSummary = async (tasks) => {
-
   const prompt = `
         You are a productivity task master assistant, help user to know about the tasks.
 
@@ -10,29 +9,34 @@ const generateSummary = async (tasks) => {
         - Be concise
         - Max 100 words
 
+        Instructions:
+         - dont use **, * or such things in response
+
         Tasks:
         ${tasks}
     `;
 
   try {
+
+    const GEMINI_API_KEY = process.env.API_KEY;
+    
     const response = await axios.post(
-      process.env.API_LLM_ENDPOINT,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
-        model: process.env.LLM_MODEL,
-        messages: [
-          { role: "system", content: "You are a helpful task briefing assistant" },
-          { role: "user", content: prompt },
-        ],
+        contents: [
+          {
+            parts: [{ text: prompt }]
+          }
+        ]
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.SAMBANOVA_API_KEY}`,
           "Content-Type": "application/json",
         },
       }
     );
 
-    return response.data.choices[0].message.content;
+    return response.data.candidates[0].content.parts[0].text;
   } catch (error) {
     console.error("AI Error:", error.response?.data || error.message);
     return "AI service is temporarily unavailable. Please try again.";
