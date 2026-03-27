@@ -1,8 +1,10 @@
 const express = require("express");
 const validateTask = require("../middlewares/validate");
-const { createTaskController } = require("../controllers");
+const { createTaskController, getAllTasksController, deleteTaskById } = require("../controllers");
 const router = express.Router();
 
 router.post('/create-task', validateTask, createTaskController)
+router.get('/all-tasks', getAllTasksController)
+router.delete('/delete-all-tasks', deleteTaskById)
 
 module.exports = router;
