@@ -4,21 +4,19 @@ const { FAILED_TO_CREATE_TASK, TASK_CREATED_SUCCESSFULLY,
      FAILED_TO_GENERATE_TASK_SUMMARY, TASK_SUMMARY_GENERATED_SUCCESSFULLY } = require("../helpers/response");
 const taskService = require("../services/task");
 const aiService = require("../services/aiService");
+
 //create task function
-const createTaskController = async(req, res) => {
+const createTaskController = async(req, res, next) => {
   try {
     const task = await taskService.createTask(req.body);
     return res.status(201).json({message: TASK_CREATED_SUCCESSFULLY, task});
   } catch (err) {
-    console.log("Eror in task creation : ", err)
-    res.status(500).json({
-      message: FAILED_TO_CREATE_TASK,
-    });
+      next(err);
   }
 };
 
 //get all tasks function
-const getAllTasksController = async(req, res) => {
+const getAllTasksController = async(req, res, next) => {
     try{
         const tasks = await taskService.getTasks();
         return res.status(200).json({
@@ -27,15 +25,12 @@ const getAllTasksController = async(req, res) => {
         })
 
     }catch(err){
-        console.log("Error in fetching tasks : ", err)
-        res.status(500).json({
-            message: FAILED_TO_FETCH_TASKS,
-        })
+        next(err);
     }
 }
 
 //delte all tasks
-const deleteTaskById = async(req, res) => {
+const deleteTaskById = async(req, res, next) => {
     try{
         const {id} = req.params;
         const task = await taskService.deleteTask(id);
@@ -51,15 +46,12 @@ const deleteTaskById = async(req, res) => {
         })
 
     }catch(err){
-        console.log("Error during delete : ", err);
-        res.status(500).json({
-            message: FAILED_TO_DELETE_TASK,
-        })
+        next(err);
     }
 }
 
 //generate summary of task
-const generateTaskSummary = async(req, res) => {
+const generateTaskSummary = async(req, res, next) => {
     try{
         const {id} = req.params;
         const task = await taskService.getTaskById(id);
@@ -80,10 +72,7 @@ const generateTaskSummary = async(req, res) => {
         })
 
     }catch(err){
-        console.log("Error during summary generation : ", err);
-        res.status(500).json({
-            message: FAILED_TO_GENERATE_TASK_SUMMARY,
-        })
+        next(err);
     }
 }
 
