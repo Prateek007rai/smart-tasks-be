@@ -11,7 +11,7 @@ const generateSummary = async (tasks) => {
         - Max 100 words
 
         Tasks:
-        ${formattedTasks}
+        ${tasks}
     `;
 
   try {
