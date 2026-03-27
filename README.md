@@ -10,3 +10,7 @@
   2. For summary generation, Endpoint - "/api/v1/task-summary/:id", Metod - "get"
   3. For task deleteion, Endpoint - "/api/v1/delete-task/:id", Method - "delete"
   4. For fetching all tasks, Endpoint - "/api/v1/all-tasks", Method - "get"
+
+What else I can do with more time: 
+  1. Will add auth using JWt for tokens and ,middleware to verify the authenticated users.
+  2. Pagination for tasks display in get api.
