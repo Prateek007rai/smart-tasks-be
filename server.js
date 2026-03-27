@@ -11,6 +11,7 @@ const routes = require('./routes');
 
 const allowedOrigins = [
   "http://localhost:3000",
+  "https://smart-tasks-fe.onrender.com"
 ];
 
 app.use(
