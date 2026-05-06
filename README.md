@@ -1,4 +1,5 @@
 **Smart Task Manager Backend** - hosted on https://smart-tasks-be.onrender.com
+**Note:** For the very first time, it will take about 1 min to start, because hosted on free instance.
 
 
  Do set-up
