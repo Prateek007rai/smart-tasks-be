@@ -2,11 +2,7 @@
 **Note:** For the very first time, it will take about 1 min to start, because hosted on free instance.
 
 
- Do set-up
-   1. Take clone of repo
-   2. Install dependencies using 'npm i'
-   3. Now, create '.env' file globally (please call me for env file or I will attach it on submission time.)
-   4. Run using command: "npm run dev"
+
 
  APIs List with endpoints (use endpoints after "https://smart-tasks-be.onrender.com"):
   1. For task creation, Endpoint - "/api/v1/create-task", MEthod - "post" , 
